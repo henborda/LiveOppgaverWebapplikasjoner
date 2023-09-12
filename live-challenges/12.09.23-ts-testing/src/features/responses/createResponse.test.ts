@@ -1,16 +1,22 @@
+import { CreateResponses } from "./types"
+import {Faker} from "./types"
+import { createResponses } from "./createResponse"
+
 // TODO: Not implemented
 const fakerMock: Faker = {
-  id,
-  answer,
-  score,
-  category,
+  id: () => "",
+  score: () => 1,
+  category: () => "",
+  answer: () => "",
 }
 
 describe.only("Create responses", () => {
+  const responses = createResponses({count: 10, faker: fakerMock})
   it("should create response", () => {
     expect(responses.size).toBe(10)
   })
   it("should have correct data", () => {
+    const responses = createResponses({ count: 10, faker: fakerMock })
     expect(firstResponse.answer).toBe("answer")
     expect(firstResponse.score).toBe(3)
     expect(firstResponse.category).toBe("one")

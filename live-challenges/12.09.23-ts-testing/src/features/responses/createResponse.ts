@@ -1,3 +1,4 @@
+import { ResponseCookies } from "next/dist/compiled/@edge-runtime/cookies"
 import { CreateResponses, Faker } from "./types"
 
 const fakeAnswers: string[] = [
@@ -21,10 +22,10 @@ const getRandomId = () => {
 
 // TODO: Oppgave 1 - Not implemented
 const faker: Faker = {
-  id,
-  answer,
-  score,
-  category,
+  id: getRandomId,
+  answer: () => getRandomItem<string>(fakeAnswers),
+  score: () => getRandomItem<number>(fakeScores),
+  category: () => getRandomItem<string>(fakeCategories),
 }
 
 // TODO: Oppgave 1 - Not implemented
@@ -33,6 +34,18 @@ const createResponses: CreateResponses = ({
   count,
   faker,
 }) => {
+  const response = new Map(existingResponses);
+  if (response.size === 0 && count ===0) throw new Error("No response added")
+  for (let i = 0; i < count; i++){
+    const response = {
+      id: faker.id(),
+      questionId: '1',
+      score: faker.score(),
+      category: faker.category(),
+      answer: faker.answer(),
+    }
+    Responses.
+  }
   return responses
 }
 
